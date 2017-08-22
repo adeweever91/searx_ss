@@ -1,0 +1,10 @@
+version: '2'
+services:
+  searx:
+    image: searx:latest
+    environment:
+      BASE_URL: https://searx.example.com
+      IMAGE_PROXY: 'True'
+    ports:
+    - 80:80/tcp
+    - 443:443/tcp
