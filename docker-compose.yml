@@ -1,7 +1,8 @@
 version: '2'
 services:
   searx:
-    image: searx:latest
+    build: .
+    image: adeweever91/searx_ss:latest
     environment:
       BASE_URL: https://searx.example.com
       IMAGE_PROXY: 'True'
