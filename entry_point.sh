@@ -12,6 +12,9 @@ fi
 sed -i -e "s|base_url : False|base_url : ${BASE_URL}|g" \
        -e "s/image_proxy : False/image_proxy : ${IMAGE_PROXY}/g" \
        -e "s/ultrasecretkey/$(openssl rand -hex 16)/g" \
+       -e "s/#result_proxy/result_proxy/" \
+       -e "s|#    url : http:\/\/0.0.0.0:3000\/|    url : ${BASE_URL}\/morty|" \
+       -e "s|#    key : your_morty_proxy_key|    key : ${MORTY_KEY}|" \
        /usr/local/searx/searx/settings.yml
 
-supervisord -c /etc/supervisord.conf
+exec supervisord -c /etc/supervisord.conf

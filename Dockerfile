@@ -21,7 +21,11 @@ RUN apk -U upgrade \
            openssl \
            tini \
            py2-pip \
-           supervisor
+           supervisor \
+           wget \
+           git \
+           go \
+           libc-dev
 
 RUN mkdir -p /run/nginx \
     && pip install --no-cache -r https://raw.githubusercontent.com/asciimoo/searx/master/requirements.txt \
@@ -37,9 +41,11 @@ RUN mkdir -p /run/nginx \
     && addgroup -S searx \
     && adduser -S -G searx -h /usr/local/searx searx
 
+WORKDIR /root
+RUN go get github.com/asciimoo/morty
+
 COPY ./configs /configs
 COPY entry_point.sh /usr/local/bin/entry_point.sh
-VOLUME /nginx
 
 RUN chmod +x /usr/local/bin/entry_point.sh \
     && ln -s /configs/searx.ini /etc/uwsgi/ \

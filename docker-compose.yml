@@ -6,6 +6,7 @@ services:
     environment:
       BASE_URL: https://searx.example.com
       IMAGE_PROXY: 'True'
+      MORTY_KEY: morty_key
     ports:
     - 80:80/tcp
     - 443:443/tcp
